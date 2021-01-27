@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GameDetailDialog } from './dialog/game-detail-dialog';
 import { GameService } from './services/game.service';
 import { environment } from '../environments/environment';
+import { Game } from './models/game';
 
 @Component({
   selector: 'app-root',
@@ -15,20 +16,20 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent implements OnDestroy {
   private searchSubject: Subject<string> = new Subject();
-  public gameList = [];
+  public gameList: Game[];
 
   constructor(
       private http: HttpClient,
       private gameService:  GameService,
       private dialog: MatDialog) {
-    this._setSearchSubscription();
+    this.setSearchSubscription();
   }
 
-  search(searchString) {
+  search(searchString: string): void {
     this.searchSubject.next(searchString);
   }
 
-  openDetail(gameId) {
+  openDetail(gameId: string) {
     this.dialog.open(GameDetailDialog, {
       data: {
         gameId: gameId
@@ -36,16 +37,16 @@ export class AppComponent implements OnDestroy {
     });
   }
 
-  private _setSearchSubscription() {
+  private setSearchSubscription(): void {
     this.searchSubject.pipe(
       debounceTime(environment.DEBOUNCE_TIME)
     ).subscribe(async (searchValue: string) => {
-      const response: any = await this.gameService.getGameList(environment.ITEM_LIMIT, searchValue).toPromise();
-      this.gameList = response.results;
+      const response: Game[] = await this.gameService.getGameList(environment.ITEM_LIMIT, searchValue).toPromise();
+      this.gameList = response;
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.searchSubject.unsubscribe();
   }
 }
