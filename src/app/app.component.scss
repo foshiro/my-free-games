@@ -1,0 +1,23 @@
+main {
+    margin: 50px 200px;
+}
+
+.tile-image {
+    width:100%;
+    height: auto;
+}
+
+.tile-grid {
+    background-color: #202020;
+    box-sizing: border-box;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,.07);
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.mat-grid-tile-header {
+    font-size: 20px;
+}
