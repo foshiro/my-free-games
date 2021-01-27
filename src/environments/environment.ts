@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_URL: 'https://api.rawg.io/api/games',
+  DEBOUNCE_TIME: 500,
+  ITEM_LIMIT: 12
 };
 
 /*

@@ -6,8 +6,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { GameDetailDialog } from "./dialog/game-detail-dialog";
-import { MatDialogModule } from "@angular/material/dialog";
+import { GameDetailDialog } from './dialog/game-detail-dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { GameService } from './services/game.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     NoopAnimationsModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
