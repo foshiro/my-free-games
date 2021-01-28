@@ -3,10 +3,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { Game } from '../models/game';
-import { getGameById, setGameDetail } from '../actions/game.actions';
-import { GameState } from '../reducers/game.reducer';
-import { selectCurrentGameDetail } from '../selectors/game.selectors';
+import { Game } from '../../models/game';
+import { getGameById, setGameDetail } from '../../actions/game.actions';
+import { GameState } from '../../reducers/game.reducer';
+import { selectCurrentGameDetail } from '../../selectors/game.selectors';
 
 @Component({
     selector: 'game-detail-dialog',

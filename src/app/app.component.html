@@ -1,16 +1,7 @@
 <header>
-  <input autofocus type="text" (keyup)="search($event.target.value)">
+  <search-bar></search-bar>
 </header>
 
 <main>
-  <mat-grid-list cols="4" rowHeight="1:1" gutterSize="25">
-    <mat-grid-tile class="tile-grid" *ngFor="let game of (gameList$ | async)" (click)="openDetail(game.slug)">
-      <img class="tile-image" src="{{ game.background_image }}">
-      <mat-grid-tile-header>{{ game.name }}</mat-grid-tile-header>
-      <mat-grid-tile-footer>Rating: {{ game.rating }}</mat-grid-tile-footer>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <grid-list></grid-list>
 </main>
-
-<footer>
-</footer>
