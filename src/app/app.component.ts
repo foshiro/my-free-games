@@ -1,13 +1,15 @@
 import { Component, OnDestroy } from '@angular/core';
-
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+
 import { GameDetailDialog } from './dialog/game-detail-dialog';
-import { GameService } from './services/game.service';
 import { environment } from '../environments/environment';
 import { Game } from './models/game';
+import { GameState } from './reducers/game.reducer';
+import { selectGameList } from './selectors/game.selectors';
+import { searchGame } from './actions/game.actions';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +18,10 @@ import { Game } from './models/game';
 })
 export class AppComponent implements OnDestroy {
   private searchSubject: Subject<string> = new Subject();
-  public gameList: Game[];
+  public gameList$: Observable<Game[]> = this.store.pipe(select(selectGameList));
 
   constructor(
-      private http: HttpClient,
-      private gameService:  GameService,
+      private store: Store<GameState>,
       private dialog: MatDialog) {
     this.setSearchSubscription();
   }
@@ -40,9 +41,8 @@ export class AppComponent implements OnDestroy {
   private setSearchSubscription(): void {
     this.searchSubject.pipe(
       debounceTime(environment.DEBOUNCE_TIME)
-    ).subscribe(async (searchValue: string) => {
-      const response: Game[] = await this.gameService.getGameList(environment.ITEM_LIMIT, searchValue).toPromise();
-      this.gameList = response;
+    ).subscribe(async (searchString: string) => {
+      this.store.dispatch(searchGame({ limit: environment.ITEM_LIMIT, searchString }));
     });
   }
 

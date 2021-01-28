@@ -9,7 +9,7 @@ import { Game } from '../models/game';
 export class GameService {
     constructor(private http: HttpClient) {}
 
-    getGameList(limit: number, searchString: string): Observable<Game[]> {
+    searchGame(limit: number, searchString: string): Observable<Game[]> {
         return this.http.get<Game[]>(`${environment.API_URL}?page_size=${limit}&search=${searchString}`).pipe(
             map(res => res['results'])
         );
