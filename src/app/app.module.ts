@@ -16,6 +16,7 @@ import { reducer } from './reducers/game.reducer';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { GridListComponent } from './components/grid-list/grid-list.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { GridListComponent } from './components/grid-list/grid-list.component';
     NoopAnimationsModule,
     MatDialogModule,
     MatIconModule,
+    InfiniteScrollModule,
     StoreModule.forRoot({game: reducer}, {}),
     EffectsModule.forRoot([GameEffects])
   ],

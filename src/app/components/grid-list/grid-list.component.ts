@@ -7,6 +7,7 @@ import { GameState } from '../../reducers/game.reducer';
 import { Game } from '../../models/game';
 import { selectGameList } from '../../selectors/game.selectors';
 import { GameDetailDialog } from '../dialog/game-detail-dialog';
+import { loadNextGameList } from '../../actions/game.actions';
 
 @Component({
   selector: 'grid-list',
@@ -20,11 +21,15 @@ export class GridListComponent {
     private store: Store<GameState>,
     private dialog: MatDialog) {}
 
-    openDetail(gameId: string) {
-      this.dialog.open(GameDetailDialog, {
-        data: {
-          gameId: gameId
-        }
-      });
-    }
+  openDetail(gameId: string) {
+    this.dialog.open(GameDetailDialog, {
+      data: {
+        gameId: gameId
+      }
+    });
+  }
+
+  onScrollEnd() {
+    this.store.dispatch(loadNextGameList());
+  }
 }

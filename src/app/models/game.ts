@@ -5,3 +5,8 @@ export interface Game {
     slug: string;
     description: string;
 }
+
+export interface SearchResponse {
+    next: string;
+    results: Game[];
+}

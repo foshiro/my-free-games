@@ -13,3 +13,8 @@ export const selectCurrentGameDetail = createSelector(
     selectGameState,
     (state: GameState) => state.currentGameDetail
 );
+
+export const selectNextPageUrl = createSelector(
+    selectGameState,
+    (state: GameState) => state.nextPageUrl
+);
